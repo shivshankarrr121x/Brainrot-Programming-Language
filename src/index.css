@@ -8,35 +8,49 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 240 10% 3.9%;
+    --foreground: 120 100% 75%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 8% 6%;
+    --card-foreground: 120 100% 85%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 8% 6%;
+    --popover-foreground: 120 100% 85%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 300 100% 60%;
+    --primary-foreground: 240 10% 3.9%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 180 100% 50%;
+    --secondary-foreground: 240 10% 3.9%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 5% 15%;
+    --muted-foreground: 120 50% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 100% 60%;
+    --accent-foreground: 240 10% 3.9%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 240 10% 3.9%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 8% 20%;
+    --input: 240 8% 15%;
+    --ring: 300 100% 60%;
 
-    --radius: 0.5rem;
+    --neon-pink: 300 100% 60%;
+    --neon-cyan: 180 100% 50%;
+    --neon-yellow: 45 100% 60%;
+    --neon-green: 120 100% 50%;
+    --chaos-purple: 270 100% 70%;
+    
+    --gradient-chaos: linear-gradient(135deg, hsl(var(--neon-pink)), hsl(var(--chaos-purple)), hsl(var(--neon-cyan)));
+    --gradient-glow: linear-gradient(90deg, hsl(var(--neon-cyan)), hsl(var(--neon-pink)));
+    --gradient-terminal: linear-gradient(180deg, hsl(240 8% 6%), hsl(240 8% 4%));
+    
+    --shadow-neon: 0 0 20px hsl(var(--neon-pink) / 0.5);
+    --shadow-glow: 0 0 40px hsl(var(--neon-cyan) / 0.3);
+    --shadow-chaos: 0 0 60px hsl(var(--chaos-purple) / 0.4);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +114,66 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
+  }
+}
+
+@layer components {
+  .glitch-text {
+    animation: glitch 2s infinite;
+  }
+  
+  .neon-glow {
+    box-shadow: var(--shadow-neon);
+    animation: neon-pulse 2s ease-in-out infinite alternate;
+  }
+  
+  .chaos-border {
+    border: 2px solid transparent;
+    background: var(--gradient-chaos) border-box;
+    border-image: var(--gradient-chaos) 1;
+  }
+  
+  .terminal-bg {
+    background: var(--gradient-terminal);
+  }
+}
+
+@keyframes glitch {
+  0%, 90%, 100% {
+    transform: translate(0);
+  }
+  10% {
+    transform: translate(-2px, 2px);
+  }
+  20% {
+    transform: translate(2px, -2px);
+  }
+  30% {
+    transform: translate(-2px, -2px);
+  }
+  40% {
+    transform: translate(2px, 2px);
+  }
+  50% {
+    transform: translate(-2px, 2px);
+  }
+  60% {
+    transform: translate(2px, -2px);
+  }
+  70% {
+    transform: translate(-2px, -2px);
+  }
+  80% {
+    transform: translate(2px, 2px);
+  }
+}
+
+@keyframes neon-pulse {
+  from {
+    box-shadow: 0 0 20px hsl(var(--neon-pink) / 0.5);
+  }
+  to {
+    box-shadow: 0 0 40px hsl(var(--neon-pink) / 0.8), 0 0 60px hsl(var(--neon-cyan) / 0.4);
   }
 }
