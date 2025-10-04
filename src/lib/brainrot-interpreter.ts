@@ -666,7 +666,12 @@ export class BrainRotParser {
   }
 
   private consume(type: string, value: string, message: string): Token {
-    if (this.check(type, value)) return this.advance();
+    if (value === '') {
+      // Just check type, not value
+      if (this.peek().type === type) return this.advance();
+    } else {
+      if (this.check(type, value)) return this.advance();
+    }
     
     const current = this.peek();
     throw new Error(`${message} at line ${current.line}, column ${current.column}`);
